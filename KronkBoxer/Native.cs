@@ -119,21 +119,18 @@ namespace KronkBoxer
 
         public static void SendString(Process p, string s)
         {
-            //PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)Keys.Enter), (IntPtr)0);
-            //Thread.Sleep(1);
-            //PostMessage(p.MainWindowHandle, WM_KEYUP, ((IntPtr)Keys.Enter), (IntPtr)0);
-
-            PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)Keys.OemQuestion), (IntPtr)0);
-            Thread.Sleep(20);
-            PostMessage(p.MainWindowHandle, WM_KEYUP, ((IntPtr)Keys.OemQuestion), (IntPtr)0);
-
+            PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)Keys.Enter), (IntPtr)0);
+            Thread.Sleep(1);
+            PostMessage(p.MainWindowHandle, WM_KEYUP, ((IntPtr)Keys.Enter), (IntPtr)0);
+            Thread.Sleep(1);
             PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)Keys.Back), (IntPtr)0);
-            Thread.Sleep(10);
+            Thread.Sleep(1);
             PostMessage(p.MainWindowHandle, WM_KEYUP, ((IntPtr)Keys.Back), (IntPtr)0);
+            Thread.Sleep(1);
 
             foreach (char c in s)
             {
-                Thread.Sleep(10);
+                //Thread.Sleep(1);
                 SendMessage(p.MainWindowHandle, 258, (uint)c, 0U);  
             }
 

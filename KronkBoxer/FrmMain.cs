@@ -20,6 +20,8 @@ namespace KronkBoxer
         public List<Client> clients = new List<Client>();
         public int running = 0; //0 = stopped, 1 = running, 2 = paused
 
+        public List<string> keyActions = new List<string>();
+
         public ControlPad controlPad;
 
         public FrmMain()
@@ -125,7 +127,7 @@ namespace KronkBoxer
 
         private PerformanceCounter perfCPU =
             new PerformanceCounter("Processor", "% Processor Time", "_Total");
-        int autoTP = 0;
+        public int autoTP = 0;
 
         private void tmrChecker_Tick(object sender, EventArgs e)
         {
@@ -156,7 +158,7 @@ namespace KronkBoxer
                     autoTP = 11;
 
                     foreach (Client c in clients)
-                        Native.SendString(c.clientProcess, "teleport " + tbxMainPlayer.Text);
+                        Native.SendString(c.clientProcess, "/teleport " + tbxMainPlayer.Text);
                 }
             }
         }

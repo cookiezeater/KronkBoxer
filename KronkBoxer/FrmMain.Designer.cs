@@ -518,7 +518,7 @@
         private System.Windows.Forms.NumericUpDown numClients;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Timer tmrChecker;
-        private System.Windows.Forms.TextBox tbxMainPlayer;
+        public System.Windows.Forms.TextBox tbxMainPlayer;
         private System.Windows.Forms.CheckBox chkAutoTeleport;
         private System.Windows.Forms.Label lblTPCountdown;
         private System.Windows.Forms.Button btnConfigKeys;

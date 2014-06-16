@@ -56,6 +56,7 @@ namespace KronkBoxer
 
         private void ControlPad_KeyDown(object sender, KeyEventArgs e)
         {
+            //main.keyActions.Add("DOWN : " + e.KeyCode.ToString());
             if (main.running == 1 && main.keysToSend.Contains(e.KeyCode))
             {
                 foreach (Client c in main.clients)
@@ -65,6 +66,17 @@ namespace KronkBoxer
 
         private void ControlPad_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == (Keys)Enum.Parse(typeof(Keys), Config.Default.macroTPKey))
+            {
+                string player = "";
+
+                main.Invoke((MethodInvoker)delegate() { player = main.tbxMainPlayer.Text; });
+                main.autoTP = 11;
+
+                foreach (Client c in main.clients)
+                    Native.SendString(c.clientProcess, "/teleport " + player);
+            }
+            //main.keyActions.Add("UP : " + e.KeyCode.ToString());
             if (main.running == 1 && main.keysToSend.Contains(e.KeyCode))
             {
                 foreach (Client c in main.clients)
