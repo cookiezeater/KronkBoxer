@@ -17,5 +17,11 @@
     <Setting Name="macroTPKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">OemMinus</Value>
     </Setting>
+    <Setting Name="refreshRate" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">16.6</Value>
+    </Setting>
+    <Setting Name="controlPadOpacity" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">85</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

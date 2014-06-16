@@ -20,6 +20,8 @@ namespace KronkBoxer
         public List<Client> clients = new List<Client>();
         public int running = 0; //0 = stopped, 1 = running, 2 = paused
 
+        public ControlPad controlPad;
+
         public FrmMain()
         {
             InitializeComponent();
@@ -42,9 +44,6 @@ namespace KronkBoxer
       
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-                e.Handled = true;
-
             if (running == 1 && keysToSend.Contains(e.KeyCode))
             {
                 foreach (Client c in clients)
@@ -54,9 +53,6 @@ namespace KronkBoxer
         
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-                e.Handled = true;
-
             if (e.KeyCode == (Keys)Enum.Parse(typeof(Keys), Config.Default.macroTPKey))
             {
                 autoTP = 11;
@@ -92,7 +88,7 @@ namespace KronkBoxer
             Config.Default.Save();
         }
 
-        private void btnToggle_Click(object sender, EventArgs e)
+        public void btnToggle_Click(object sender, EventArgs e)
         {
             if (running == 0) //start
             {
@@ -125,6 +121,9 @@ namespace KronkBoxer
                     return;
                 }
 
+                controlPad = new ControlPad(this);
+                controlPad.Show();
+
                 running = 1;
                 lblStatus.Text = "Running [" + clients.Count + "]";
             }
@@ -142,6 +141,9 @@ namespace KronkBoxer
 
                 running = 0;
                 lblStatus.Text = "Stopped";
+
+                controlPad.Close();
+                controlPad = null;
             }
         }
 

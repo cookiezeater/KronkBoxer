@@ -82,5 +82,29 @@ namespace KronkBoxer {
                 this["macroTPKey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16.6")]
+        public float refreshRate {
+            get {
+                return ((float)(this["refreshRate"]));
+            }
+            set {
+                this["refreshRate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("85")]
+        public int controlPadOpacity {
+            get {
+                return ((int)(this["controlPadOpacity"]));
+            }
+            set {
+                this["controlPadOpacity"] = value;
+            }
+        }
     }
 }

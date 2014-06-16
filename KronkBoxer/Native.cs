@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Threading;
 using Microsoft.Win32;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace KronkBoxer
 {
@@ -31,6 +33,24 @@ namespace KronkBoxer
         private const uint WM_KEYUP = 0x101;
         private const uint WM_PASTE = 0x302;
 
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Rect
+        {
+            public int left;
+            public int top;
+            public int right;
+            public int bottom;
+        }
+
+        [DllImport("user32.dll")]
+        private static extern int SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetWindowRect(IntPtr hWnd, ref Rect rect);
+
         [DllImport("USER32.DLL")]
         public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
@@ -40,6 +60,9 @@ namespace KronkBoxer
         [DllImport("user32.dll")]
         public static extern IntPtr PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool PostMessage(IntPtr hWnd, int Msg, uint wParam, uint lParam);
+
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
@@ -48,6 +71,9 @@ namespace KronkBoxer
 
         [DllImport("user32.dll")]
         private static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
+
+        [DllImport("user32.dll")]
+        public static extern bool PrintWindow(IntPtr hWnd, IntPtr hdcBlt, int nFlags);
 
         private static bool ShowWindow(Process _Process, int nCmdShow)
         {
@@ -99,36 +125,85 @@ namespace KronkBoxer
             PostMessage(p.MainWindowHandle, WM_KEYUP, ((IntPtr)Keys.Enter), (IntPtr)0);
         }
 
-        public static IEnumerable<string> RecommendedPrograms(string ext)
+        public static Bitmap CaptureApplication(IntPtr p)
         {
-            List<string> progs = new List<string>();
-
-            string baseKey = @"Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\." + ext;
-
-            using (RegistryKey rk = Registry.CurrentUser.OpenSubKey(baseKey + @"\OpenWithList"))
+            try
             {
-                if (rk != null)
-                {
-                    string mruList = (string)rk.GetValue("MRUList");
-                    if (mruList != null)
-                    {
-                        foreach (char c in mruList.ToString())
-                        if(rk.GetValue(c.ToString())!=null)
-                            progs.Add(rk.GetValue(c.ToString()).ToString());
-                    }
-                }
-            }
+                Rect rect = new Rect();
+                IntPtr error = GetWindowRect(p, ref rect);
 
-            using (RegistryKey rk = Registry.CurrentUser.OpenSubKey(baseKey + @"\OpenWithProgids"))
+                int width = rect.right - rect.left;
+                int height = rect.bottom - rect.top;
+
+                Bitmap bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
+                Graphics graphics = Graphics.FromImage(bmp);
+                graphics.CopyFromScreen(rect.left, rect.top, 0, 0, new Size(width, height), CopyPixelOperation.SourceCopy);
+
+                graphics.Dispose();
+                graphics = null;
+
+                return bmp;
+            }
+            catch
             {
-                if (rk != null)
-                {
-                    foreach (string item in rk.GetValueNames())
-                        progs.Add(item);
-                }
+                return new Bitmap(1, 1);
             }
+        }
 
-            return progs;
+        public static Size GetWindowSize(Process p)
+        {
+            Rect rect = new Rect();
+            IntPtr error = GetWindowRect(p.MainWindowHandle, ref rect);
+
+            Size s = new Size();
+            s.Width = rect.right - rect.left;
+            s.Height = rect.bottom - rect.top;
+
+            return s;
+        }
+
+        public static void BackgroundMousePosition(Process p, int x, int y)
+        {
+            PostMessage(p.MainWindowHandle, 512, 0U, GetLParam(x, y));
+        }
+
+        public static void BackgroundMouseClick(Process p, int button, int x, int y)
+        {
+            switch (button)
+            {
+                case 1:
+                    PostMessage(p.MainWindowHandle, 513, (uint)1, GetLParam(x, y));
+                    Thread.Sleep(10);
+                    PostMessage(p.MainWindowHandle, 514, (uint)1, GetLParam(x, y));
+                    break;
+
+                case 2:
+                    PostMessage(p.MainWindowHandle, 516, (uint)2, GetLParam(x, y));
+                    Thread.Sleep(10);
+                    PostMessage(p.MainWindowHandle, 517, (uint)2, GetLParam(x, y));
+                    break;
+
+                case 3:
+                    PostMessage(p.MainWindowHandle, 519, (uint)3, GetLParam(x, y));
+                    Thread.Sleep(10);
+                    PostMessage(p.MainWindowHandle, 520, (uint)3, GetLParam(x, y));
+                    break;
+            }
+        }
+
+        public static void BackgroundMouseDown(Process p, int x, int y)
+        {
+            PostMessage(p.MainWindowHandle, 513, (uint)1, GetLParam(x, y));
+        }
+
+        public static void BackgroundMouseUp(Process p, int x, int y)
+        {
+            PostMessage(p.MainWindowHandle, 514, (uint)1, GetLParam(x, y));
+        }
+
+        private static uint GetLParam(int x, int y)
+        {
+            return (uint)(y << 16 | x & (int)ushort.MaxValue);
         }
     }
 }

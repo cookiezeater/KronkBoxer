@@ -7,3 +7,4 @@ C:\Users\Alec\Google Drive\Projects\KronkBoxer\KronkBoxer\obj\Debug\KronkBoxer.c
 C:\Users\Alec\Google Drive\Projects\KronkBoxer\KronkBoxer\obj\Debug\KronkBoxer.exe
 C:\Users\Alec\Google Drive\Projects\KronkBoxer\KronkBoxer\obj\Debug\KronkBoxer.pdb
 C:\Users\Alec\Google Drive\Projects\KronkBoxer\KronkBoxer\obj\Debug\KronkBoxer.FrmMain.resources
+C:\Users\Alec\Google Drive\Projects\KronkBoxer\KronkBoxer\obj\Debug\KronkBoxer.ControlPad.resources
