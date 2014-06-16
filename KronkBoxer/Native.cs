@@ -82,12 +82,31 @@ namespace KronkBoxer
 
         public static Process LoadProcessInControl(string _Process, Control _Control)
         {
+            /* OLD
             Process p = Process.Start(_Process);
             p.WaitForInputIdle();
             SetParent(p.MainWindowHandle, _Control.Handle);
 
             SetWindowLong(p.MainWindowHandle, GWL_STYLE, WS_SYSMENU);
             ShowWindow(p, SW_SHOWMAXIMIZED);
+
+            return p;
+             */
+            Process p = Process.Start(_Process);
+            new Thread(() =>
+                {
+                    p.WaitForInputIdle();
+                    p.WaitForInputIdle();
+                    Thread.Sleep(2000);
+
+                    IntPtr control = IntPtr.Zero;
+
+                    _Control.Invoke((MethodInvoker)delegate() { control = _Control.Handle; });
+                    SetParent(p.MainWindowHandle, control);
+
+                    SetWindowLong(p.MainWindowHandle, GWL_STYLE, WS_SYSMENU);
+                    ShowWindow(p, SW_SHOWMAXIMIZED);
+                }).Start();
 
             return p;
         }
