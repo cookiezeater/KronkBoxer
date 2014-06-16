@@ -26,6 +26,13 @@ namespace KronkBoxer
         {
             InitializeComponent();
 
+            //Populate keys listbox
+            foreach (Keys key in Enum.GetValues(typeof(Keys)))
+            {
+                lstKeys.Items.Add(key.ToString());
+                lstTPAllKey.Items.Add(key.ToString());
+            }
+            lstKeys.SelectedIndex = 0;
             //Panels available for clients to be parented to
             panels.Add(splitTop.Panel1);
             panels.Add(splitTop.Panel2);
@@ -36,7 +43,8 @@ namespace KronkBoxer
             numClients.Value = Config.Default.numClients;
             tbxClientPath.Text = Config.Default.clientPath;
             tbxMainPlayer.Text = Config.Default.mainPlayer;
-            
+            tbxKeysToSend.Text = Config.Default.keysToSend;
+            lstTPAllKey.SelectedItem = Config.Default.macroTPKey;
             foreach (string s in Config.Default.keysToSend.Split(','))
                 if (s.Length > 0)
                     keysToSend.Add((Keys)Enum.Parse(typeof(Keys), s));
@@ -78,12 +86,7 @@ namespace KronkBoxer
             }
 
             Config.Default.numClients = (int)numClients.Value;
-            Config.Default.clientPath = tbxClientPath.Text;
             Config.Default.mainPlayer = tbxMainPlayer.Text;
-            string temp = "";
-            foreach (Keys key in keysToSend)
-                temp += key.ToString() + ",";
-            Config.Default.keysToSend = temp;
 
             Config.Default.Save();
         }
@@ -147,22 +150,6 @@ namespace KronkBoxer
             }
         }
 
-        private void btnPause_Click(object sender, EventArgs e)
-        {
-            if (running == 1) //running
-            {
-                btnPause.BackColor = Color.FromArgb(190, 108, 30);
-                running = 2;
-                lblStatus.Text = "Paused [" + clients.Count + "]";
-            }
-            else if (running == 2) //paused
-            {
-                btnPause.BackColor = Color.FromArgb(220, 128, 30);
-                running = 1;
-                lblStatus.Text = "Running [" + clients.Count + "]";
-            }
-        }
-
         private PerformanceCounter perfCPU =
             new PerformanceCounter("Processor", "% Processor Time", "_Total");
         int autoTP = 0;
@@ -215,44 +202,43 @@ namespace KronkBoxer
                 tbxClientPath.Text = FD.FileName;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            foreach (Client c in clients)
-                Native.SendString(c.clientProcess, "poop");
-        }
-
         private void btnConfigKeys_Click(object sender, EventArgs e)
         {
-            string input = Microsoft.VisualBasic.Interaction.InputBox("Please enter the names of any keys, seperated by commas, to be broadcasted to all clients when pressed.\n", "KronkBoxer Key Config", Config.Default.keysToSend, -1, -1);
+            pnlSettings.Visible = !pnlSettings.Visible;
+        }
 
-            if (input != "")
+
+        private void btnAddKey_Click(object sender, EventArgs e)
+        {
+            if (lstKeys.SelectedIndex > 0)
             {
-                try
-                {
-                    foreach (string s in input.Split(','))
-                        if (s.Length > 0)
-                            Enum.Parse(typeof(Keys), s);
-                }
-                catch
-                {
-                    MessageBox.Show("Input was invalid.\nPlease make sure you're using only valid names of keys and are seperating them with commas (NO SPACES).\n\nFor a list of key names, please refer to http://msdn.microsoft.com/en-us/library/system.windows.forms.keys.aspx", "KronkBoxer Key Config");
-                    return;
-                }
-                Config.Default.keysToSend = input;
-                Config.Default.Save();
-
-                keysToSend.Clear();
-
-                foreach (string s in Config.Default.keysToSend.Split(','))
-                    if (s.Length > 0)
-                        keysToSend.Add((Keys)Enum.Parse(typeof(Keys), s));
+                if (tbxKeysToSend.Text.EndsWith(","))
+                    tbxKeysToSend.Text += lstKeys.Items[lstKeys.SelectedIndex].ToString();
+                else
+                    tbxKeysToSend.Text += "," + lstKeys.Items[lstKeys.SelectedIndex].ToString();
             }
         }
 
-        private void btnEditMacros_Click(object sender, EventArgs e)
+        private void btnApply_Click(object sender, EventArgs e)
         {
-            Config.Default.macroTPKey = Microsoft.VisualBasic.Interaction.InputBox("Please enter the key you wish to bind to the Teleport Macro", "KronkBoxer Key Config", Config.Default.macroTPKey, -1, -1);
+            try
+            {
+                foreach (string s in tbxKeysToSend.Text.Split(','))
+                    if (s.Length > 0)
+                        Enum.Parse(typeof(Keys), s);
+            }
+            catch
+            {
+                MessageBox.Show("Input was invalid.\nPlease make sure you're using only valid names of keys and are seperating them with commas (NO SPACES).\n\nFor a list of key names, please refer to http://msdn.microsoft.com/en-us/library/system.windows.forms.keys.aspx", "KronkBoxer Key Config");
+                return;
+            }
+
+            Config.Default.macroTPKey = lstTPAllKey.Items[lstTPAllKey.SelectedIndex].ToString();
+            Config.Default.keysToSend = tbxKeysToSend.Text;
+            Config.Default.clientPath = tbxClientPath.Text;
             Config.Default.Save();
+
+            pnlSettings.Visible = false;
         }
     }
 }

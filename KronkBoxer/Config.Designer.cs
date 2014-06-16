@@ -97,10 +97,10 @@ namespace KronkBoxer {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("85")]
-        public int controlPadOpacity {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.85")]
+        public double controlPadOpacity {
             get {
-                return ((int)(this["controlPadOpacity"]));
+                return ((double)(this["controlPadOpacity"]));
             }
             set {
                 this["controlPadOpacity"] = value;

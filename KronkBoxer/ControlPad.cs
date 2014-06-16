@@ -27,7 +27,6 @@ namespace KronkBoxer
             lstClients.SelectedIndex = 0;
 
             numRefreshRate.Value = (decimal)Config.Default.refreshRate;
-            numOpacity.Value = Config.Default.controlPadOpacity;
         }
 
         private void ControlPad_FormClosing(object sender, FormClosingEventArgs e)
@@ -35,7 +34,6 @@ namespace KronkBoxer
             if (main.running != 0)
             {
                 Config.Default.refreshRate = (float)numRefreshRate.Value;
-                Config.Default.controlPadOpacity = (int)numOpacity.Value;
                 Config.Default.Save();
 
                 tmrSS.Stop();
@@ -121,11 +119,6 @@ namespace KronkBoxer
             float percentY = (float)actual.Height / (float)pbxClient.Size.Height; // other window / the one that was clicked
 
             return new Point((int)(percentX * pos.X), (int)(percentY * pos.Y) - 20); //-20 due to title bar offset
-        }
-
-        private void numOpacity_ValueChanged(object sender, EventArgs e)
-        {
-            this.Opacity = (double)numOpacity.Value;
         }
     }
 }

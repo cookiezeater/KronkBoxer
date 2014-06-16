@@ -20,8 +20,8 @@
     <Setting Name="refreshRate" Type="System.Single" Scope="User">
       <Value Profile="(Default)">16.6</Value>
     </Setting>
-    <Setting Name="controlPadOpacity" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">85</Value>
+    <Setting Name="controlPadOpacity" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.85</Value>
     </Setting>
   </Settings>
 </SettingsFile>

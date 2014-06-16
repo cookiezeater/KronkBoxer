@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ControlPad));
             this.tmrSS = new System.Windows.Forms.Timer(this.components);
             this.pbxClient = new System.Windows.Forms.PictureBox();
             this.pnlHeader = new System.Windows.Forms.Panel();
@@ -36,12 +37,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.numRefreshRate = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.numOpacity = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbxClient)).BeginInit();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRefreshRate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numOpacity)).BeginInit();
             this.SuspendLayout();
             // 
             // tmrSS
@@ -72,8 +70,6 @@
             this.pnlHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlHeader.Controls.Add(this.numRefreshRate);
             this.pnlHeader.Controls.Add(this.label2);
-            this.pnlHeader.Controls.Add(this.numOpacity);
-            this.pnlHeader.Controls.Add(this.label3);
             this.pnlHeader.Controls.Add(this.lstClients);
             this.pnlHeader.Controls.Add(this.label1);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -137,36 +133,6 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Frame Delay";
             // 
-            // numOpacity
-            // 
-            this.numOpacity.Font = new System.Drawing.Font("Segoe UI", 6F);
-            this.numOpacity.Location = new System.Drawing.Point(151, 3);
-            this.numOpacity.Minimum = new decimal(new int[] {
-            45,
-            0,
-            0,
-            0});
-            this.numOpacity.Name = "numOpacity";
-            this.numOpacity.Size = new System.Drawing.Size(34, 18);
-            this.numOpacity.TabIndex = 11;
-            this.numOpacity.Value = new decimal(new int[] {
-            45,
-            0,
-            0,
-            0});
-            this.numOpacity.ValueChanged += new System.EventHandler(this.numOpacity_ValueChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label3.Location = new System.Drawing.Point(104, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 15);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Opacity";
-            // 
             // ControlPad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,10 +140,11 @@
             this.ClientSize = new System.Drawing.Size(384, 261);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pbxClient);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(230, 170);
             this.Name = "ControlPad";
-            this.Opacity = 0.5D;
+            this.Opacity = 0.9D;
             this.Text = "ControlPad";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ControlPad_FormClosing);
@@ -187,7 +154,6 @@
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRefreshRate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numOpacity)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -201,7 +167,5 @@
         private System.Windows.Forms.NumericUpDown numRefreshRate;
         private System.Windows.Forms.ComboBox lstClients;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numOpacity;
-        private System.Windows.Forms.Label label3;
     }
 }
