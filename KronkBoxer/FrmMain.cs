@@ -49,33 +49,6 @@ namespace KronkBoxer
                 if (s.Length > 0)
                     keysToSend.Add((Keys)Enum.Parse(typeof(Keys), s));
         }
-      
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (running == 1 && keysToSend.Contains(e.KeyCode))
-            {
-                foreach (Client c in clients)
-                    Native.SendDown(c.clientProcess, e.KeyCode);
-            }
-        }
-        
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == (Keys)Enum.Parse(typeof(Keys), Config.Default.macroTPKey))
-            {
-                autoTP = 11;
-
-                foreach (Client c in clients)
-                    Native.SendString(c.clientProcess, "/teleport " + tbxMainPlayer.Text);
-            }
-
-
-            if (running == 1 && keysToSend.Contains(e.KeyCode))
-            {
-                foreach (Client c in clients)
-                    Native.SendUp(c.clientProcess, e.KeyCode);
-            }
-        }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -183,15 +156,9 @@ namespace KronkBoxer
                     autoTP = 11;
 
                     foreach (Client c in clients)
-                        Native.SendString(c.clientProcess, "/teleport " + tbxMainPlayer.Text);
+                        Native.SendString(c.clientProcess, "teleport " + tbxMainPlayer.Text);
                 }
             }
-        }
-
-        private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-                e.Handled = true;
         }
 
         private void btnClientBrowse_Click(object sender, EventArgs e)
@@ -239,6 +206,11 @@ namespace KronkBoxer
             Config.Default.Save();
 
             pnlSettings.Visible = false;
+        }
+
+        private void lblKeysInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("http://msdn.microsoft.com/en-us/library/system.windows.forms.keys.aspx");
         }
     }
 }

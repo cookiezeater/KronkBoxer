@@ -82,16 +82,6 @@ namespace KronkBoxer
 
         public static Process LoadProcessInControl(string _Process, Control _Control)
         {
-            /* OLD
-            Process p = Process.Start(_Process);
-            p.WaitForInputIdle();
-            SetParent(p.MainWindowHandle, _Control.Handle);
-
-            SetWindowLong(p.MainWindowHandle, GWL_STYLE, WS_SYSMENU);
-            ShowWindow(p, SW_SHOWMAXIMIZED);
-
-            return p;
-             */
             Process p = Process.Start(_Process);
             new Thread(() =>
                 {
@@ -129,9 +119,17 @@ namespace KronkBoxer
 
         public static void SendString(Process p, string s)
         {
-            PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)Keys.Enter), (IntPtr)0);
-            Thread.Sleep(1);
-            PostMessage(p.MainWindowHandle, WM_KEYUP, ((IntPtr)Keys.Enter), (IntPtr)0);
+            //PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)Keys.Enter), (IntPtr)0);
+            //Thread.Sleep(1);
+            //PostMessage(p.MainWindowHandle, WM_KEYUP, ((IntPtr)Keys.Enter), (IntPtr)0);
+
+            PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)Keys.OemQuestion), (IntPtr)0);
+            Thread.Sleep(20);
+            PostMessage(p.MainWindowHandle, WM_KEYUP, ((IntPtr)Keys.OemQuestion), (IntPtr)0);
+
+            PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)Keys.Back), (IntPtr)0);
+            Thread.Sleep(10);
+            PostMessage(p.MainWindowHandle, WM_KEYUP, ((IntPtr)Keys.Back), (IntPtr)0);
 
             foreach (char c in s)
             {

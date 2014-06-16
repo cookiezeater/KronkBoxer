@@ -38,25 +38,27 @@
             this.tbxMainPlayer = new System.Windows.Forms.TextBox();
             this.lblTPCountdown = new System.Windows.Forms.Label();
             this.chkAutoTeleport = new System.Windows.Forms.CheckBox();
+            this.btnConfigKeys = new System.Windows.Forms.Button();
             this.numClients = new System.Windows.Forms.NumericUpDown();
             this.btnToggle = new System.Windows.Forms.Button();
             this.imlToggle = new System.Windows.Forms.ImageList(this.components);
             this.lblPerformance = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.tmrChecker = new System.Windows.Forms.Timer(this.components);
-            this.btnConfigKeys = new System.Windows.Forms.Button();
             this.pnlSettings = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lstTPAllKey = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnApply = new System.Windows.Forms.Button();
+            this.tbxKeysToSend = new System.Windows.Forms.TextBox();
+            this.lstKeys = new System.Windows.Forms.ComboBox();
+            this.btnAddKey = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.tbxClientPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClientBrowse = new System.Windows.Forms.Button();
-            this.tbxKeysToSend = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnAddKey = new System.Windows.Forms.Button();
-            this.lstKeys = new System.Windows.Forms.ComboBox();
-            this.btnApply = new System.Windows.Forms.Button();
-            this.lstTPAllKey = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblKeysInfo = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
             this.splitMain.Panel2.SuspendLayout();
@@ -184,6 +186,23 @@
             this.chkAutoTeleport.Text = "Auto teleport to:";
             this.chkAutoTeleport.UseVisualStyleBackColor = true;
             // 
+            // btnConfigKeys
+            // 
+            this.btnConfigKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConfigKeys.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnConfigKeys.FlatAppearance.BorderSize = 0;
+            this.btnConfigKeys.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfigKeys.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfigKeys.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnConfigKeys.Image = ((System.Drawing.Image)(resources.GetObject("btnConfigKeys.Image")));
+            this.btnConfigKeys.Location = new System.Drawing.Point(717, 3);
+            this.btnConfigKeys.Name = "btnConfigKeys";
+            this.btnConfigKeys.Size = new System.Drawing.Size(64, 31);
+            this.btnConfigKeys.TabIndex = 8;
+            this.btnConfigKeys.TabStop = false;
+            this.btnConfigKeys.UseVisualStyleBackColor = false;
+            this.btnConfigKeys.Click += new System.EventHandler(this.btnConfigKeys_Click);
+            // 
             // numClients
             // 
             this.numClients.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
@@ -256,28 +275,13 @@
             this.tmrChecker.Interval = 1000;
             this.tmrChecker.Tick += new System.EventHandler(this.tmrChecker_Tick);
             // 
-            // btnConfigKeys
-            // 
-            this.btnConfigKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfigKeys.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.btnConfigKeys.FlatAppearance.BorderSize = 0;
-            this.btnConfigKeys.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConfigKeys.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfigKeys.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnConfigKeys.Image = ((System.Drawing.Image)(resources.GetObject("btnConfigKeys.Image")));
-            this.btnConfigKeys.Location = new System.Drawing.Point(717, 3);
-            this.btnConfigKeys.Name = "btnConfigKeys";
-            this.btnConfigKeys.Size = new System.Drawing.Size(64, 31);
-            this.btnConfigKeys.TabIndex = 8;
-            this.btnConfigKeys.TabStop = false;
-            this.btnConfigKeys.UseVisualStyleBackColor = false;
-            this.btnConfigKeys.Click += new System.EventHandler(this.btnConfigKeys_Click);
-            // 
             // pnlSettings
             // 
             this.pnlSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlSettings.BackColor = System.Drawing.Color.Gray;
             this.pnlSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSettings.Controls.Add(this.lblKeysInfo);
+            this.pnlSettings.Controls.Add(this.label5);
             this.pnlSettings.Controls.Add(this.label4);
             this.pnlSettings.Controls.Add(this.lstTPAllKey);
             this.pnlSettings.Controls.Add(this.label3);
@@ -296,6 +300,110 @@
             this.pnlSettings.Size = new System.Drawing.Size(276, 332);
             this.pnlSettings.TabIndex = 4;
             this.pnlSettings.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label4.Location = new System.Drawing.Point(34, 193);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(135, 21);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "Teleport all clients";
+            // 
+            // lstTPAllKey
+            // 
+            this.lstTPAllKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lstTPAllKey.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lstTPAllKey.FormattingEnabled = true;
+            this.lstTPAllKey.Location = new System.Drawing.Point(171, 193);
+            this.lstTPAllKey.Name = "lstTPAllKey";
+            this.lstTPAllKey.Size = new System.Drawing.Size(98, 23);
+            this.lstTPAllKey.TabIndex = 16;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label3.Location = new System.Drawing.Point(7, 172);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(70, 21);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "HotKeys:";
+            // 
+            // btnApply
+            // 
+            this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnApply.BackColor = System.Drawing.Color.DarkGray;
+            this.btnApply.FlatAppearance.BorderSize = 0;
+            this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApply.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApply.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnApply.ImageIndex = 0;
+            this.btnApply.Location = new System.Drawing.Point(11, 288);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(252, 33);
+            this.btnApply.TabIndex = 14;
+            this.btnApply.TabStop = false;
+            this.btnApply.Text = "Apply";
+            this.btnApply.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnApply.UseVisualStyleBackColor = false;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            // 
+            // tbxKeysToSend
+            // 
+            this.tbxKeysToSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbxKeysToSend.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbxKeysToSend.Location = new System.Drawing.Point(11, 87);
+            this.tbxKeysToSend.Name = "tbxKeysToSend";
+            this.tbxKeysToSend.Size = new System.Drawing.Size(252, 23);
+            this.tbxKeysToSend.TabIndex = 10;
+            this.tbxKeysToSend.TabStop = false;
+            // 
+            // lstKeys
+            // 
+            this.lstKeys.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lstKeys.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lstKeys.FormattingEnabled = true;
+            this.lstKeys.Location = new System.Drawing.Point(110, 108);
+            this.lstKeys.Name = "lstKeys";
+            this.lstKeys.Size = new System.Drawing.Size(98, 23);
+            this.lstKeys.TabIndex = 13;
+            // 
+            // btnAddKey
+            // 
+            this.btnAddKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddKey.BackColor = System.Drawing.Color.DarkGray;
+            this.btnAddKey.FlatAppearance.BorderSize = 0;
+            this.btnAddKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddKey.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddKey.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAddKey.ImageIndex = 0;
+            this.btnAddKey.Location = new System.Drawing.Point(208, 105);
+            this.btnAddKey.Name = "btnAddKey";
+            this.btnAddKey.Size = new System.Drawing.Size(54, 26);
+            this.btnAddKey.TabIndex = 12;
+            this.btnAddKey.TabStop = false;
+            this.btnAddKey.Text = "Add";
+            this.btnAddKey.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAddKey.UseVisualStyleBackColor = false;
+            this.btnAddKey.Click += new System.EventHandler(this.btnAddKey_Click);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label2.Location = new System.Drawing.Point(7, 110);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(97, 21);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Keys to send";
             // 
             // tbxClientPath
             // 
@@ -338,109 +446,29 @@
             this.btnClientBrowse.UseVisualStyleBackColor = false;
             this.btnClientBrowse.Click += new System.EventHandler(this.btnClientBrowse_Click);
             // 
-            // tbxKeysToSend
+            // label5
             // 
-            this.tbxKeysToSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbxKeysToSend.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.tbxKeysToSend.Location = new System.Drawing.Point(11, 87);
-            this.tbxKeysToSend.Name = "tbxKeysToSend";
-            this.tbxKeysToSend.Size = new System.Drawing.Size(252, 23);
-            this.tbxKeysToSend.TabIndex = 10;
-            this.tbxKeysToSend.TabStop = false;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label5.Location = new System.Drawing.Point(8, 134);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 15);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Info on keys:";
             // 
-            // label2
+            // lblKeysInfo
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label2.Location = new System.Drawing.Point(7, 110);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 21);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Keys to send";
-            // 
-            // btnAddKey
-            // 
-            this.btnAddKey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddKey.BackColor = System.Drawing.Color.DarkGray;
-            this.btnAddKey.FlatAppearance.BorderSize = 0;
-            this.btnAddKey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddKey.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddKey.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnAddKey.ImageIndex = 0;
-            this.btnAddKey.Location = new System.Drawing.Point(208, 105);
-            this.btnAddKey.Name = "btnAddKey";
-            this.btnAddKey.Size = new System.Drawing.Size(54, 26);
-            this.btnAddKey.TabIndex = 12;
-            this.btnAddKey.TabStop = false;
-            this.btnAddKey.Text = "Add";
-            this.btnAddKey.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAddKey.UseVisualStyleBackColor = false;
-            this.btnAddKey.Click += new System.EventHandler(this.btnAddKey_Click);
-            // 
-            // lstKeys
-            // 
-            this.lstKeys.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.lstKeys.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lstKeys.FormattingEnabled = true;
-            this.lstKeys.Location = new System.Drawing.Point(110, 108);
-            this.lstKeys.Name = "lstKeys";
-            this.lstKeys.Size = new System.Drawing.Size(98, 23);
-            this.lstKeys.TabIndex = 13;
-            // 
-            // btnApply
-            // 
-            this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApply.BackColor = System.Drawing.Color.DarkGray;
-            this.btnApply.FlatAppearance.BorderSize = 0;
-            this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnApply.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnApply.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnApply.ImageIndex = 0;
-            this.btnApply.Location = new System.Drawing.Point(11, 288);
-            this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(252, 33);
-            this.btnApply.TabIndex = 14;
-            this.btnApply.TabStop = false;
-            this.btnApply.Text = "Apply";
-            this.btnApply.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnApply.UseVisualStyleBackColor = false;
-            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
-            // 
-            // lstTPAllKey
-            // 
-            this.lstTPAllKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.lstTPAllKey.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lstTPAllKey.FormattingEnabled = true;
-            this.lstTPAllKey.Location = new System.Drawing.Point(171, 193);
-            this.lstTPAllKey.Name = "lstTPAllKey";
-            this.lstTPAllKey.Size = new System.Drawing.Size(98, 23);
-            this.lstTPAllKey.TabIndex = 16;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label3.Location = new System.Drawing.Point(7, 172);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 21);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "HotKeys:";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label4.Location = new System.Drawing.Point(34, 193);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(135, 21);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "Teleport all clients";
+            this.lblKeysInfo.AutoSize = true;
+            this.lblKeysInfo.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblKeysInfo.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(160)))));
+            this.lblKeysInfo.Location = new System.Drawing.Point(77, 134);
+            this.lblKeysInfo.Name = "lblKeysInfo";
+            this.lblKeysInfo.Size = new System.Drawing.Size(70, 15);
+            this.lblKeysInfo.TabIndex = 19;
+            this.lblKeysInfo.TabStop = true;
+            this.lblKeysInfo.Text = "CLICK HERE";
+            this.lblKeysInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblKeysInfo_LinkClicked);
             // 
             // FrmMain
             // 
@@ -459,9 +487,6 @@
             this.Name = "FrmMain";
             this.Text = "KronkBoxer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FrmMain_KeyPress);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.splitMain.Panel1.ResumeLayout(false);
             this.splitMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).EndInit();
@@ -509,6 +534,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox lstTPAllKey;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.LinkLabel lblKeysInfo;
+        private System.Windows.Forms.Label label5;
 
 
     }
