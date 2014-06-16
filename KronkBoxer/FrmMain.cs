@@ -200,6 +200,12 @@ namespace KronkBoxer
                 return;
             }
 
+            keysToSend.Clear();
+
+            foreach (string s in tbxKeysToSend.Text.Split(','))
+                if (s.Length > 0)
+                    keysToSend.Add((Keys)Enum.Parse(typeof(Keys), s));
+
             Config.Default.macroTPKey = lstTPAllKey.Items[lstTPAllKey.SelectedIndex].ToString();
             Config.Default.keysToSend = tbxKeysToSend.Text;
             Config.Default.clientPath = tbxClientPath.Text;
