@@ -59,6 +59,8 @@
             this.tbxClientPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClientBrowse = new System.Windows.Forms.Button();
+            this.chkSetShowAll = new System.Windows.Forms.CheckBox();
+            this.btnResetLayout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
             this.splitMain.Panel2.SuspendLayout();
@@ -141,6 +143,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlHeader.BackColor = System.Drawing.Color.Gray;
             this.pnlHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlHeader.Controls.Add(this.btnResetLayout);
             this.pnlHeader.Controls.Add(this.tbxMainPlayer);
             this.pnlHeader.Controls.Add(this.lblTPCountdown);
             this.pnlHeader.Controls.Add(this.chkAutoTeleport);
@@ -280,6 +283,7 @@
             this.pnlSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlSettings.BackColor = System.Drawing.Color.Gray;
             this.pnlSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSettings.Controls.Add(this.chkSetShowAll);
             this.pnlSettings.Controls.Add(this.lblKeysInfo);
             this.pnlSettings.Controls.Add(this.label5);
             this.pnlSettings.Controls.Add(this.label4);
@@ -470,6 +474,35 @@
             this.btnClientBrowse.UseVisualStyleBackColor = false;
             this.btnClientBrowse.Click += new System.EventHandler(this.btnClientBrowse_Click);
             // 
+            // chkSetShowAll
+            // 
+            this.chkSetShowAll.AutoSize = true;
+            this.chkSetShowAll.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.chkSetShowAll.Location = new System.Drawing.Point(11, 240);
+            this.chkSetShowAll.Name = "chkSetShowAll";
+            this.chkSetShowAll.Size = new System.Drawing.Size(194, 25);
+            this.chkSetShowAll.TabIndex = 20;
+            this.chkSetShowAll.Text = "Set clients to \"Show All\"";
+            this.chkSetShowAll.UseVisualStyleBackColor = true;
+            // 
+            // btnResetLayout
+            // 
+            this.btnResetLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnResetLayout.BackColor = System.Drawing.Color.Gray;
+            this.btnResetLayout.FlatAppearance.BorderSize = 0;
+            this.btnResetLayout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnResetLayout.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnResetLayout.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnResetLayout.Location = new System.Drawing.Point(589, 3);
+            this.btnResetLayout.Name = "btnResetLayout";
+            this.btnResetLayout.Size = new System.Drawing.Size(125, 31);
+            this.btnResetLayout.TabIndex = 11;
+            this.btnResetLayout.TabStop = false;
+            this.btnResetLayout.Text = "Reset Layout";
+            this.btnResetLayout.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnResetLayout.UseVisualStyleBackColor = false;
+            this.btnResetLayout.Click += new System.EventHandler(this.btnResetLayout_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -485,6 +518,7 @@
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "FrmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "KronkBoxer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.splitMain.Panel1.ResumeLayout(false);
@@ -536,6 +570,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.LinkLabel lblKeysInfo;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox chkSetShowAll;
+        private System.Windows.Forms.Button btnResetLayout;
 
 
     }

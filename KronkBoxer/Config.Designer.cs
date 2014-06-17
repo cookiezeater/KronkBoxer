@@ -106,5 +106,101 @@ namespace KronkBoxer {
                 this["controlPadOpacity"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool setShowAll {
+            get {
+                return ((bool)(this["setShowAll"]));
+            }
+            set {
+                this["setShowAll"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("800")]
+        public int sizeWidth {
+            get {
+                return ((int)(this["sizeWidth"]));
+            }
+            set {
+                this["sizeWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int sizeHeight {
+            get {
+                return ((int)(this["sizeHeight"]));
+            }
+            set {
+                this["sizeHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int posX {
+            get {
+                return ((int)(this["posX"]));
+            }
+            set {
+                this["posX"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int posY {
+            get {
+                return ((int)(this["posY"]));
+            }
+            set {
+                this["posY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("390")]
+        public int splitTopPoint {
+            get {
+                return ((int)(this["splitTopPoint"]));
+            }
+            set {
+                this["splitTopPoint"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("390")]
+        public int splitBottomPoint {
+            get {
+                return ((int)(this["splitBottomPoint"]));
+            }
+            set {
+                this["splitBottomPoint"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("247")]
+        public int splitMainPoint {
+            get {
+                return ((int)(this["splitMainPoint"]));
+            }
+            set {
+                this["splitMainPoint"] = value;
+            }
+        }
     }
 }

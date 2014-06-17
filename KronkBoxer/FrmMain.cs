@@ -40,10 +40,17 @@ namespace KronkBoxer
             panels.Add(splitBottom.Panel2);
             numClients.Maximum = panels.Count;
             //Load config
+            this.Size = new Size(Config.Default.sizeWidth, Config.Default.sizeHeight);
+            this.Location = new Point(Config.Default.posX, Config.Default.posY);
+            splitMain.SplitterDistance = Config.Default.splitMainPoint;
+            splitTop.SplitterDistance = Config.Default.splitTopPoint;
+            splitBottom.SplitterDistance = Config.Default.splitBottomPoint;
+
             numClients.Value = Config.Default.numClients;
             tbxClientPath.Text = Config.Default.clientPath;
             tbxMainPlayer.Text = Config.Default.mainPlayer;
             tbxKeysToSend.Text = Config.Default.keysToSend;
+            chkSetShowAll.Checked = Config.Default.setShowAll;
             lstTPAllKey.SelectedItem = Config.Default.macroTPKey;
             foreach (string s in Config.Default.keysToSend.Split(','))
                 if (s.Length > 0)
@@ -55,6 +62,15 @@ namespace KronkBoxer
             foreach (Client c in clients)
                 if (!c.clientProcess.HasExited)
                     c.clientProcess.Kill();
+
+            //Save settings
+            Config.Default.sizeWidth = this.Size.Width;
+            Config.Default.sizeHeight = this.Size.Height;
+            Config.Default.posX = this.Location.X;
+            Config.Default.posY = this.Location.Y;
+            Config.Default.splitMainPoint = splitMain.SplitterDistance;
+            Config.Default.splitTopPoint = splitTop.SplitterDistance;
+            Config.Default.splitBottomPoint = splitBottom.SplitterDistance;
 
             Config.Default.numClients = (int)numClients.Value;
             Config.Default.mainPlayer = tbxMainPlayer.Text;
@@ -191,6 +207,7 @@ namespace KronkBoxer
             Config.Default.macroTPKey = lstTPAllKey.Items[lstTPAllKey.SelectedIndex].ToString();
             Config.Default.keysToSend = tbxKeysToSend.Text;
             Config.Default.clientPath = tbxClientPath.Text;
+            Config.Default.setShowAll = chkSetShowAll.Checked;
             Config.Default.Save();
 
             pnlSettings.Visible = false;
@@ -199,6 +216,13 @@ namespace KronkBoxer
         private void lblKeysInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("http://msdn.microsoft.com/en-us/library/system.windows.forms.keys.aspx");
+        }
+
+        private void btnResetLayout_Click(object sender, EventArgs e)
+        {
+            splitMain.SplitterDistance = this.ClientRectangle.Height / 2 - 39; //-39 due to header
+            splitTop.SplitterDistance = this.ClientRectangle.Width / 2;
+            splitBottom.SplitterDistance = this.ClientRectangle.Width / 2;
         }
     }
 }

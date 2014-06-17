@@ -33,10 +33,10 @@
             this.tmrSS = new System.Windows.Forms.Timer(this.components);
             this.pbxClient = new System.Windows.Forms.PictureBox();
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.lstClients = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.numRefreshRate = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
+            this.lstClients = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbxClient)).BeginInit();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRefreshRate)).BeginInit();
@@ -80,27 +80,6 @@
             this.pnlHeader.Size = new System.Drawing.Size(384, 26);
             this.pnlHeader.TabIndex = 3;
             // 
-            // lstClients
-            // 
-            this.lstClients.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.lstClients.Font = new System.Drawing.Font("Segoe UI", 6F);
-            this.lstClients.FormattingEnabled = true;
-            this.lstClients.Location = new System.Drawing.Point(31, 2);
-            this.lstClients.Name = "lstClients";
-            this.lstClients.Size = new System.Drawing.Size(63, 19);
-            this.lstClients.TabIndex = 9;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label1.Location = new System.Drawing.Point(0, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 15);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "View";
-            // 
             // numRefreshRate
             // 
             this.numRefreshRate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -133,6 +112,27 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Frame Delay";
             // 
+            // lstClients
+            // 
+            this.lstClients.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lstClients.Font = new System.Drawing.Font("Segoe UI", 6F);
+            this.lstClients.FormattingEnabled = true;
+            this.lstClients.Location = new System.Drawing.Point(31, 2);
+            this.lstClients.Name = "lstClients";
+            this.lstClients.Size = new System.Drawing.Size(63, 19);
+            this.lstClients.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label1.Location = new System.Drawing.Point(0, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 15);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "View";
+            // 
             // ControlPad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,6 +145,7 @@
             this.MinimumSize = new System.Drawing.Size(230, 170);
             this.Name = "ControlPad";
             this.Opacity = 0.9D;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ControlPad";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ControlPad_FormClosing);

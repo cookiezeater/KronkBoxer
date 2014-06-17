@@ -32,6 +32,7 @@ namespace KronkBoxer
         private const uint WM_KEYDOWN = 0x100;
         private const uint WM_KEYUP = 0x101;
         private const uint WM_PASTE = 0x302;
+        private const int WM_COMMAND = 0x0111;
 
         [StructLayout(LayoutKind.Sequential)]
         public struct Rect
@@ -117,11 +118,6 @@ namespace KronkBoxer
             PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)k), (IntPtr)0);
         }
 
-        [DllImport("user32.dll")]
-        public static extern int SendMessage(IntPtr hwnd, int msg, IntPtr wParam, [MarshalAs(UnmanagedType.LPStr)] string lParam);
-        private const int WM_SETTEXT = 0x000C;
-        private const int WM_COMMAND = 0x0111;
-
         public static void SendString(Process p, string s)
         {
             Clipboard.SetText(s);
@@ -132,8 +128,7 @@ namespace KronkBoxer
             Thread.Sleep(20);
 
             SendMessage(p.MainWindowHandle, WM_COMMAND, (IntPtr)(1 | 57637), (IntPtr)0); //1 = accelerator, 57637 = acceleratorID
-            //PostMessage(p.MainWindowHandle, WM_COMMAND, (IntPtr)1, (IntPtr)57637);
-            //PostMessage(p.MainWindowHandle, WM_COMMAND, (IntPtr)0, (IntPtr)0);
+            //Sends the command (WM_COMMAND) to PASTE (accelerator shortcut 57637). God that's sooo gay.s
 
             Thread.Sleep(20);
 
