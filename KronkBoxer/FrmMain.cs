@@ -138,7 +138,7 @@ namespace KronkBoxer
             {
                 if (!clients[i].clientProcess.HasExited)
                 {
-                    lblPerformance.Text += "[" + i + "] " + clients[i].clientProcess.PagedMemorySize64 / 1024 / 1024 + "mb   :   ";
+                    lblPerformance.Text += "[" + i + "] " + clients[i].clientProcess.VirtualMemorySize64 / 1024 / 1024 + "mb   :   ";
                 }
             }
 
@@ -155,10 +155,7 @@ namespace KronkBoxer
             {
                 if (chkAutoTeleport.Checked && running == 1)
                 {
-                    autoTP = 11;
-
-                    foreach (Client c in clients)
-                        Native.SendString(c.clientProcess, "/teleport " + tbxMainPlayer.Text);
+                    controlPad.Teleport();
                 }
             }
         }

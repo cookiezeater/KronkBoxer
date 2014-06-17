@@ -14,6 +14,8 @@ namespace KronkBoxer
     {
         public FrmMain main;
 
+        public List<Keys> pressedKeys = new List<Keys>();
+
         public bool leftMouse = false;
 
         public ControlPad(FrmMain owner)
@@ -27,6 +29,25 @@ namespace KronkBoxer
             lstClients.SelectedIndex = 0;
 
             numRefreshRate.Value = (decimal)Config.Default.refreshRate;
+        }
+
+        public async Task Teleport() //Because async is better for this kind of thing
+        {
+            string player = "";
+
+            main.Invoke((MethodInvoker)delegate() { player = main.tbxMainPlayer.Text; });
+            main.autoTP = 11;
+
+            foreach (Keys keyDown in pressedKeys.ToArray()) //Send all the keys up so they don't interfere with the /tp
+                foreach (Client c in main.clients)
+                    Native.SendUp(c.clientProcess, keyDown);
+
+            foreach (Client c in main.clients)
+                Native.SendString(c.clientProcess, "/teleport " + player);
+
+            foreach (Keys keyDown in pressedKeys.ToArray()) //Since this is async, some keys may be up now - but they were removed from pressedKeys, so sending all of them down will be still accurate.
+                foreach (Client c in main.clients)
+                    Native.SendDown(c.clientProcess, keyDown);
         }
 
         private void ControlPad_FormClosing(object sender, FormClosingEventArgs e)
@@ -50,7 +71,7 @@ namespace KronkBoxer
 
                 pbxClient.Image = null;
                 pbxClient.Image = Native.CaptureApplication(main.clients[lstClients.SelectedIndex].clientProcess.MainWindowHandle);
-                pbxClient.Refresh();
+                //pbxClient.Refresh();
             }
         }
 
@@ -59,6 +80,8 @@ namespace KronkBoxer
             //main.keyActions.Add("DOWN : " + e.KeyCode.ToString());
             if (main.running == 1 && main.keysToSend.Contains(e.KeyCode))
             {
+                pressedKeys.Add(e.KeyCode);
+
                 foreach (Client c in main.clients)
                     Native.SendDown(c.clientProcess, e.KeyCode);
             }
@@ -68,17 +91,13 @@ namespace KronkBoxer
         {
             if (e.KeyCode == (Keys)Enum.Parse(typeof(Keys), Config.Default.macroTPKey))
             {
-                string player = "";
-
-                main.Invoke((MethodInvoker)delegate() { player = main.tbxMainPlayer.Text; });
-                main.autoTP = 11;
-
-                foreach (Client c in main.clients)
-                    Native.SendString(c.clientProcess, "/teleport " + player);
+                Teleport();
             }
             //main.keyActions.Add("UP : " + e.KeyCode.ToString());
             if (main.running == 1 && main.keysToSend.Contains(e.KeyCode))
             {
+                pressedKeys.Remove(e.KeyCode);
+
                 foreach (Client c in main.clients)
                     Native.SendUp(c.clientProcess, e.KeyCode);
             }

@@ -117,22 +117,25 @@ namespace KronkBoxer
             PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)k), (IntPtr)0);
         }
 
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hwnd, int msg, IntPtr wParam, [MarshalAs(UnmanagedType.LPStr)] string lParam);
+        private const int WM_SETTEXT = 0x000C;
+        private const int WM_COMMAND = 0x0111;
+
         public static void SendString(Process p, string s)
         {
-            PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)Keys.Enter), (IntPtr)0);
+            Clipboard.SetText(s);
+
+            SendMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)Keys.Enter), (IntPtr)0);
             Thread.Sleep(1);
             PostMessage(p.MainWindowHandle, WM_KEYUP, ((IntPtr)Keys.Enter), (IntPtr)0);
-            Thread.Sleep(1);
-            PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)Keys.Back), (IntPtr)0);
-            Thread.Sleep(1);
-            PostMessage(p.MainWindowHandle, WM_KEYUP, ((IntPtr)Keys.Back), (IntPtr)0);
-            Thread.Sleep(1);
+            Thread.Sleep(20);
 
-            foreach (char c in s)
-            {
-                //Thread.Sleep(1);
-                SendMessage(p.MainWindowHandle, 258, (uint)c, 0U);  
-            }
+            SendMessage(p.MainWindowHandle, WM_COMMAND, (IntPtr)(1 | 57637), (IntPtr)0); //1 = accelerator, 57637 = acceleratorID
+            //PostMessage(p.MainWindowHandle, WM_COMMAND, (IntPtr)1, (IntPtr)57637);
+            //PostMessage(p.MainWindowHandle, WM_COMMAND, (IntPtr)0, (IntPtr)0);
+
+            Thread.Sleep(20);
 
             PostMessage(p.MainWindowHandle, WM_KEYDOWN, ((IntPtr)Keys.Enter), (IntPtr)0);
             Thread.Sleep(1);
