@@ -20,15 +20,13 @@ namespace KronkBoxer
         public List<Client> clients = new List<Client>();
         public int running = 0; //0 = stopped, 1 = running, 2 = paused
 
-        public List<string> keyActions = new List<string>();
-
         public ControlPad controlPad;
 
         public FrmMain()
         {
             InitializeComponent();
 
-            //Populate keys listbox
+            //Populate keys listboxes
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
             {
                 lstKeys.Items.Add(key.ToString());
@@ -55,10 +53,8 @@ namespace KronkBoxer
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             foreach (Client c in clients)
-            {
                 if (!c.clientProcess.HasExited)
                     c.clientProcess.Kill();
-            }
 
             Config.Default.numClients = (int)numClients.Value;
             Config.Default.mainPlayer = tbxMainPlayer.Text;
@@ -84,9 +80,7 @@ namespace KronkBoxer
                 try
                 {
                     for (int i = 0; i < count; i++)
-                    {
                         clients.Add(new Client(panels[i], tbxClientPath.Text));
-                    }
                 }
                 catch
                 {
@@ -111,10 +105,9 @@ namespace KronkBoxer
                 btnToggle.BackColor = Color.FromArgb(60, 170, 60);
 
                 foreach (Client c in clients)
-                {
                     if (!c.clientProcess.HasExited)
                         c.clientProcess.Kill();
-                }
+
                 clients.Clear();
 
                 running = 0;
@@ -135,29 +128,19 @@ namespace KronkBoxer
             lblPerformance.Text = "CPU " + (int)perfCPU.NextValue() + "%  |  RAM: ";
 
             for (int i = 0; i < clients.Count; i++)
-            {
                 if (!clients[i].clientProcess.HasExited)
-                {
                     lblPerformance.Text += "[" + i + "] " + clients[i].clientProcess.VirtualMemorySize64 / 1024 / 1024 + "mb   :   ";
-                }
-            }
 
             lblPerformance.Location = new Point(this.Width - 50 - lblPerformance.Size.Width, lblPerformance.Location.Y);
 
-            //Auto TP
-            
+            //Auto T
             if (autoTP > 0)
                 autoTP--;
 
             lblTPCountdown.Text = "Able to teleport in " + autoTP + "...";
 
-            if (autoTP == 0)
-            {
-                if (chkAutoTeleport.Checked && running == 1)
-                {
-                    controlPad.Teleport();
-                }
-            }
+            if (autoTP == 0 && chkAutoTeleport.Checked && running == 1)
+                controlPad.Teleport();
         }
 
         private void btnClientBrowse_Click(object sender, EventArgs e)

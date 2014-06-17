@@ -71,13 +71,11 @@ namespace KronkBoxer
 
                 pbxClient.Image = null;
                 pbxClient.Image = Native.CaptureApplication(main.clients[lstClients.SelectedIndex].clientProcess.MainWindowHandle);
-                //pbxClient.Refresh();
             }
         }
 
         private void ControlPad_KeyDown(object sender, KeyEventArgs e)
         {
-            //main.keyActions.Add("DOWN : " + e.KeyCode.ToString());
             if (main.running == 1 && main.keysToSend.Contains(e.KeyCode))
             {
                 pressedKeys.Add(e.KeyCode);
@@ -90,13 +88,14 @@ namespace KronkBoxer
         private void ControlPad_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == (Keys)Enum.Parse(typeof(Keys), Config.Default.macroTPKey))
-            {
                 Teleport();
-            }
-            //main.keyActions.Add("UP : " + e.KeyCode.ToString());
+
             if (main.running == 1 && main.keysToSend.Contains(e.KeyCode))
             {
-                pressedKeys.Remove(e.KeyCode);
+                //pressedKeys.Remove(e.KeyCode); this wont work because it's removing instances of that REFERENCE
+                foreach (Keys key in pressedKeys.ToArray())
+                    if (object.Equals(key, e.KeyCode)) 
+                        pressedKeys.Remove(key);
 
                 foreach (Client c in main.clients)
                     Native.SendUp(c.clientProcess, e.KeyCode);
@@ -149,7 +148,7 @@ namespace KronkBoxer
             float percentX = (float)actual.Width / (float)pbxClient.Size.Width;// other window / the one that was clicked
             float percentY = (float)actual.Height / (float)pbxClient.Size.Height; // other window / the one that was clicked
 
-            return new Point((int)(percentX * pos.X), (int)(percentY * pos.Y) - 20); //-20 due to title bar offset
+            return new Point((int)(percentX * pos.X), (int)(percentY * pos.Y) - 20); //-20 due to menu bar offset
         }
     }
 }

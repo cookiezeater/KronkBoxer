@@ -46,6 +46,8 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.tmrChecker = new System.Windows.Forms.Timer(this.components);
             this.pnlSettings = new System.Windows.Forms.Panel();
+            this.lblKeysInfo = new System.Windows.Forms.LinkLabel();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lstTPAllKey = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -57,8 +59,6 @@
             this.tbxClientPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClientBrowse = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblKeysInfo = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
             this.splitMain.Panel2.SuspendLayout();
@@ -171,9 +171,9 @@
             this.lblTPCountdown.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblTPCountdown.Location = new System.Drawing.Point(122, 19);
             this.lblTPCountdown.Name = "lblTPCountdown";
-            this.lblTPCountdown.Size = new System.Drawing.Size(126, 15);
+            this.lblTPCountdown.Size = new System.Drawing.Size(120, 15);
             this.lblTPCountdown.TabIndex = 10;
-            this.lblTPCountdown.Text = "Able to teleport in 10...";
+            this.lblTPCountdown.Text = "Able to teleport in 0...";
             // 
             // chkAutoTeleport
             // 
@@ -251,12 +251,12 @@
             this.lblPerformance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPerformance.AutoSize = true;
             this.lblPerformance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPerformance.Location = new System.Drawing.Point(647, 543);
+            this.lblPerformance.Location = new System.Drawing.Point(671, 543);
             this.lblPerformance.Name = "lblPerformance";
             this.lblPerformance.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblPerformance.Size = new System.Drawing.Size(115, 15);
+            this.lblPerformance.Size = new System.Drawing.Size(90, 15);
             this.lblPerformance.TabIndex = 0;
-            this.lblPerformance.Text = "CPU 0%  |  RAM 50%";
+            this.lblPerformance.Text = "CPU 0%  |  RAM";
             // 
             // lblStatus
             // 
@@ -300,6 +300,30 @@
             this.pnlSettings.Size = new System.Drawing.Size(276, 332);
             this.pnlSettings.TabIndex = 4;
             this.pnlSettings.Visible = false;
+            // 
+            // lblKeysInfo
+            // 
+            this.lblKeysInfo.AutoSize = true;
+            this.lblKeysInfo.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblKeysInfo.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(160)))));
+            this.lblKeysInfo.Location = new System.Drawing.Point(77, 134);
+            this.lblKeysInfo.Name = "lblKeysInfo";
+            this.lblKeysInfo.Size = new System.Drawing.Size(70, 15);
+            this.lblKeysInfo.TabIndex = 19;
+            this.lblKeysInfo.TabStop = true;
+            this.lblKeysInfo.Text = "CLICK HERE";
+            this.lblKeysInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblKeysInfo_LinkClicked);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label5.Location = new System.Drawing.Point(8, 134);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 15);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Info on keys:";
             // 
             // label4
             // 
@@ -445,30 +469,6 @@
             this.btnClientBrowse.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnClientBrowse.UseVisualStyleBackColor = false;
             this.btnClientBrowse.Click += new System.EventHandler(this.btnClientBrowse_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label5.Location = new System.Drawing.Point(8, 134);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(74, 15);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Info on keys:";
-            // 
-            // lblKeysInfo
-            // 
-            this.lblKeysInfo.AutoSize = true;
-            this.lblKeysInfo.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblKeysInfo.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(160)))));
-            this.lblKeysInfo.Location = new System.Drawing.Point(77, 134);
-            this.lblKeysInfo.Name = "lblKeysInfo";
-            this.lblKeysInfo.Size = new System.Drawing.Size(70, 15);
-            this.lblKeysInfo.TabIndex = 19;
-            this.lblKeysInfo.TabStop = true;
-            this.lblKeysInfo.Text = "CLICK HERE";
-            this.lblKeysInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblKeysInfo_LinkClicked);
             // 
             // FrmMain
             // 
